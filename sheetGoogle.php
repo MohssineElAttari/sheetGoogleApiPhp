@@ -32,3 +32,31 @@ if (empty($values)) {
 } else {
     print json_encode($values);
 }
+
+// Updating the data in your google sheet
+
+// Set your update range like earlier
+$update_range = "P2m!A4:B4";
+// Store your values in an array of arrays.
+$values = [["testNom", "testPrenom"]];
+
+
+// Creating a request.
+$body = new Google_Service_Sheets_ValueRange([
+
+      'values' => $values
+
+    ]);
+
+    $params = [
+
+      'valueInputOption' => 'RAW'
+
+    ];
+
+    // Calling update service.
+
+    $update_sheet = $service->spreadsheets_values->update($spreadsheetId, $update_range, $body, $params);
+
+
+    
